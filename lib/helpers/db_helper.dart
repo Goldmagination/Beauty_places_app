@@ -2,9 +2,9 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 
 class DbHelper {
-  static Future<void> insert(String table, Map<String, Object> data) async {
+  static Future<sql.Database> database() async {
     final dbPath = await sql.getDatabasesPath();
-    final sqlDb = await sql.openDatabase(
+    return sql.openDatabase(
       path.join(dbPath, 'places.db'),
       onCreate: (db, version) {
         return db.execute(
@@ -12,7 +12,15 @@ class DbHelper {
       },
       version: 1,
     );
-    await sqlDb.insert(table, data,
-        conflictAlgorithm: sql.ConflictAlgorithm.replace);
+  }
+
+  static Future<void> insert(String table, Map<String, Object> data) async {
+    final db = await DbHelper.database();
+    db.insert(table, data, conflictAlgorithm: sql.ConflictAlgorithm.replace);
+  }
+
+  static Future<List<Map<String, Object>>> fetchData(String table) async {
+    final db = await DbHelper.database();
+    return db.query(table);
   }
 }
