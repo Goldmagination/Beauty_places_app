@@ -9,6 +9,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="beauty_places_app"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCO92Yi-9hHM0tL7oTu1pdnBAbl9v0l1eI"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
