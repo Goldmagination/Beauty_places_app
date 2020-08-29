@@ -37,6 +37,8 @@ class PlacesList extends StatelessWidget {
                                     FileImage(provideredPlaces.items[i].image),
                               ),
                               title: Text(provideredPlaces.items[i].title),
+                              subtitle: Text(
+                                  provideredPlaces.items[i].location.address),
                               onTap: () {},
                             ),
                             itemCount: provideredPlaces.items.length,
